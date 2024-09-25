@@ -12,11 +12,12 @@ pillow
 psutil
 pykeyboard
 py-tgcalls==1.2.9
-#git+https://github.com/KurimuzonAkuma/pyrogram@dev
+ntgcalls==1.1.2
+git+https://github.com/KurimuzonAkuma/pyrogram@dev
 python-dotenv
 pyyaml
 requests
-telethon==1.33.1
+telethon
 speedtest-cli
 spotipy
 tgcrypto
