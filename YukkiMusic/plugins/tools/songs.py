@@ -27,7 +27,7 @@ from YukkiMusic.utils.decorators.language import language, languageCB
 from YukkiMusic.utils.formatters import convert_bytes
 from YukkiMusic.utils.inline.song import song_markup
 
-cookies_file = "cookies/cookies.txt", 
+cookies_file = "cookies/cookies.txt"
 
 
 # Command
