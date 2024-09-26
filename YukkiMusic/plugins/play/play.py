@@ -57,6 +57,21 @@ async def play_commnd(
     url,
     fplay,
 ):
+    if not await is_served_user(message.from_user.id):
+        await message.reply_text(
+            text="⚠️  Error , Not a Verified User ⚠️\nPlease start the bot in Private Message Box First and Then use it.",
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="🚀Click Here to Start",
+                            url=f"https://t.me/{app.username}?start=verify",
+                        )
+                    ]
+                ]
+            ),
+        )
+        return
     mystic = await message.reply_text(
         _["play_2"].format(channel) if channel else _["play_1"]
     )
