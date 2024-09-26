@@ -27,9 +27,6 @@ from YukkiMusic.utils.decorators.language import language, languageCB
 from YukkiMusic.utils.formatters import convert_bytes
 from YukkiMusic.utils.inline.song import song_markup
 
-cookies_file = "cookies/cookies.txt"
-
-
 # Command
 SONG_COMMAND = get_command("SONG_COMMAND")
 
@@ -245,7 +242,7 @@ async def song_download_cb(client, CallbackQuery, _):
     mystic = await CallbackQuery.edit_message_text(_["song_8"])
     yturl = f"https://www.youtube.com/watch?v={vidid}"
     with yt_dlp.YoutubeDL({"quiet": True}) as ytdl:
-        x = ytdl.extract_info(yturl, download=True)
+        x = ytdl.extract_info(yturl, download=False)
     title = (x["title"]).title()
     title = re.sub("\W+", " ", title)
     thumb_image_path = await CallbackQuery.message.download()
@@ -260,7 +257,6 @@ async def song_download_cb(client, CallbackQuery, _):
                 mystic,
                 songvideo=True,
                 format_id=format_id,
-                "cookiefile": cookies_file,
                 title=title,
             )
         except Exception as e:
@@ -273,13 +269,11 @@ async def song_download_cb(client, CallbackQuery, _):
             thumb=thumb_image_path,
             caption=title,
             supports_streaming=True,
-            "cookiefile": cookies_file,
         )
         await mystic.edit_text(_["song_11"])
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
             action=ChatAction.UPLOAD_VIDEO,
-            "cookiefile": cookies_file,
         )
         try:
             await CallbackQuery.edit_message_media(media=med)
@@ -295,7 +289,6 @@ async def song_download_cb(client, CallbackQuery, _):
                 songaudio=True,
                 format_id=format_id,
                 title=title,
-                "cookiefile": cookies_file,
             )
         except Exception as e:
             return await mystic.edit_text(_["song_9"].format(e))
@@ -305,7 +298,6 @@ async def song_download_cb(client, CallbackQuery, _):
             thumb=thumb_image_path,
             title=title,
             performer=x["uploader"],
-            "cookiefile": cookies_file,
         )
         await mystic.edit_text(_["song_11"])
         await app.send_chat_action(
