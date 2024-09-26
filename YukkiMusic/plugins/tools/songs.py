@@ -242,7 +242,7 @@ async def song_download_cb(client, CallbackQuery, _):
     mystic = await CallbackQuery.edit_message_text(_["song_8"])
     yturl = f"https://www.youtube.com/watch?v={vidid}"
     with yt_dlp.YoutubeDL({"quiet": True}) as ytdl:
-        x = ytdl.extract_info(yturl, download=False)
+        x = ytdl.extract_info(yturl, download=True)
     title = (x["title"]).title()
     title = re.sub("\W+", " ", title)
     thumb_image_path = await CallbackQuery.message.download()
